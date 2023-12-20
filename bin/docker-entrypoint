@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Check if master.key exists
+if [ ! -f /gratuity/config/secrets/master.key ]; then
+  echo "Generating master.key..."
+  # Run the rails credentials:edit command in non-interactive mode
+  EDITOR="echo" rails credentials:edit
+fi
+
+rm -f tmp/pids/server.pid
+
+/gratuity/bin/rails db:prepare
+/gratuity/bin/rails db:seed
+
+/gratuity/bin/rails server
+
+# exec "${@}"
