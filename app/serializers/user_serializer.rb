@@ -24,6 +24,5 @@ class UserSerializer < ApplicationSerializer
 
   has_many :roles, serializer: RoleSerializer
   has_many :activities, serializer: ActivitySerializer
-  has_many :people, serializer: PersonSerializer
   has_one :person, serializer: PersonSerializer
 end

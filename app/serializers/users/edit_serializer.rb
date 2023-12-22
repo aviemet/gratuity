@@ -7,6 +7,5 @@ class Users::EditSerializer < ApplicationSerializer
     :active,
   )
 
-  has_many :people, serializer: PersonSerializer
   has_one :person, serializer: PersonSerializer
 end

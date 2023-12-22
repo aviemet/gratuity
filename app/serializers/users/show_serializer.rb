@@ -26,6 +26,5 @@ class Users::ShowSerializer < ApplicationSerializer
   has_many :roles, serializer: RoleSerializer
   has_many :activities, serializer: ActivitySerializer
 
-  has_many :people, serializer: ShowUserPersonSerializer
-  has_one :person, serializer: ShowUserPersonSerializer
+  has_one :person, serializer: PersonSerializer
 end

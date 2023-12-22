@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   # CONCERNS #
 
+  concern :bulk_delete do
+    collection do
+      delete :destroy
+    end
+  end
+
   # ROOT PATH #
 
   root "pages#dashboard"
@@ -10,6 +16,16 @@ Rails.application.routes.draw do
   get "dashboard" => "pages#dashboard", as: :dashboard
 
   # SETTINGS PAGES #
+
+  namespace :settings do
+    resources :appearance, only: [:index]
+    match :appearance, to: "appearance#update", via: [:put, :patch]
+    resources :general
+    resources :integrations
+    resources :ldaps, path: :ldap, except: [:show, :new, :edit]
+    patch "ldaps/:id/sync" => "ldaps#sync", as: :ldap_sync
+    resources :logs
+  end
 
   # DEVISE PATHS #
 
@@ -39,6 +55,17 @@ Rails.application.routes.draw do
   post "users/complete_registration" => "users#save_complete_registration", as: :save_complete_registration
 
   # RESOURCEFUL PATHS #
+
+  resources :users
+  resources :people
+  resources :person_groups
+  resources :service_templates_fields
+  resources :services_periods
+  resources :services
+  resources :service_templates
+  resources :rules
+  resources :fields
+  resources :periods
 
   draw(:api)
 end

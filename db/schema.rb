@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_03_11_034956) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -33,6 +33,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_11_034956) do
     t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ldaps", force: :cascade do |t|
@@ -65,6 +73,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_11_034956) do
     t.index ["person_id", "role_id"], name: "index_people_roles_on_person_id_and_role_id"
     t.index ["person_id"], name: "index_people_roles_on_person_id"
     t.index ["role_id"], name: "index_people_roles_on_role_id"
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.string "name"
+    t.time "start_time"
+    t.time "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "person_group_assignments", force: :cascade do |t|
@@ -111,6 +127,52 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_11_034956) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "rules", force: :cascade do |t|
+    t.string "name"
+    t.bigint "field_id", null: false
+    t.string "operator"
+    t.decimal "operation_value"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_rules_on_field_id"
+  end
+
+  create_table "service_templates", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "service_templates_fields", force: :cascade do |t|
+    t.bigint "service_template_id", null: false
+    t.bigint "field_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["field_id"], name: "index_service_templates_fields_on_field_id"
+    t.index ["service_template_id"], name: "index_service_templates_fields_on_service_template_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.date "date"
+    t.bigint "period_id", null: false
+    t.bigint "service_template_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["period_id"], name: "index_services_on_period_id"
+    t.index ["service_template_id"], name: "index_services_on_service_template_id"
+  end
+
+  create_table "services_periods", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.bigint "period_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["period_id"], name: "index_services_periods_on_period_id"
+    t.index ["service_id"], name: "index_services_periods_on_service_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -166,4 +228,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_03_11_034956) do
   add_foreign_key "people", "users"
   add_foreign_key "person_group_assignments", "people"
   add_foreign_key "person_group_assignments", "person_groups"
+  add_foreign_key "rules", "fields"
+  add_foreign_key "service_templates_fields", "fields"
+  add_foreign_key "service_templates_fields", "service_templates"
+  add_foreign_key "services", "periods"
+  add_foreign_key "services", "service_templates"
+  add_foreign_key "services_periods", "periods"
+  add_foreign_key "services_periods", "services"
 end

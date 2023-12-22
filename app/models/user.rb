@@ -12,8 +12,6 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
 
-  has_many :people, dependent: :nullify
-
   has_one :person, dependent: :nullify do
     self.people.joins(:owner)
   end

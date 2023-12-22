@@ -1,6 +1,4 @@
 class PersonGroup < ApplicationRecord
-  include Ownable
-
   multisearchable(
     against: [:name],
     additional_attributes: ->(record) { { label: record.name } },

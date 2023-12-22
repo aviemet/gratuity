@@ -1,6 +1,5 @@
 import React from 'react'
 import { useLayoutStore } from '@/lib/store'
-import QuickNewMenu from './QuickNewMenu'
 import { Box, AppShell, Burger, Group } from '@mantine/core'
 import cx from 'clsx'
 import AvatarMenu from './AvatarMenu'
@@ -28,7 +27,6 @@ const Topbar = () => {
 				/>
 
 				<Group>
-					<QuickNewMenu />
 					<AvatarMenu />
 				</Group>
 
