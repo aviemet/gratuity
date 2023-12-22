@@ -9,9 +9,6 @@ type TRegisterFormData = {
 		first_name: string
 		last_name: string
 	}
-	company: {
-		name: string
-	}
 }
 
 const CompleteRegistration = () => {
@@ -21,9 +18,6 @@ const CompleteRegistration = () => {
 		person: {
 			first_name: user.person?.first_name ?? '',
 			last_name: user.person?.last_name ?? '',
-		},
-		company: {
-			name: user.active_company?.name ?? '',
 		},
 	}
 
@@ -47,14 +41,6 @@ const CompleteRegistration = () => {
 
 					<Field>
 						<TextInput name="last_name" placeholder="Last Name" autoComplete="last-name" />
-					</Field>
-
-					<Field>
-						<p>And the name of the entity which owns the assets you&apos;ll be tracking.</p>
-
-						<TextInput name="name" model="company" placeholder="Company Name" />
-
-						<p>If you will be tracking assets owned by multiple companies, enter the primary entity here, you&apos;ll have the opportunity to create other companies later.</p>
 					</Field>
 
 					<Field mb={ 16 }>

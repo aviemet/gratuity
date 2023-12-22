@@ -5,22 +5,18 @@ class User < ApplicationRecord
     additional_attributes: ->(record) { { label: record.email } },
   )
 
-  tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token, :active_company]
+  tracked except: [:reset_password_token, :remember_created_at, :sign_in_count, :last_sign_in_at, :last_sign_in_ip, :confirmation_token, :confirmed_at, :confirmation_sent_at, :unconfirmed_email, :unlock_token]
   resourcify
   rolify
 
   # Include default devise modules. Others available are: , :omniauthable, :timeoutable,
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :invitable
 
-  belongs_to :active_company, class_name: :Company, optional: true
   has_many :people, dependent: :nullify
-  has_many :companies, through: :people
 
   has_one :person, dependent: :nullify do
-    self.people.joins(:owner).find_by({ owner: { company: self.active_company } })
+    self.people.joins(:owner)
   end
-
-  alias company active_company
 
   # store_accessor :table_preferences
   store_accessor :user_preferences, :dark_mode
@@ -34,7 +30,6 @@ class User < ApplicationRecord
   # validates :password, presence: true, if: "id.nil?"
 
   before_save :coerce_json
-  before_save :set_active_company
 
   # accepts_nested_attributes_for :person
 
@@ -48,12 +43,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def set_active_company
-    return if self.active_company
-
-    self.active_company = self.person ? self.person.company : self.companies.first
-  end
 
   def coerce_json
     self.dark_mode = ActiveModel::Type::Boolean.new.cast(self.dark_mode) if self.dark_mode

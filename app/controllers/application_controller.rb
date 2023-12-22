@@ -10,12 +10,10 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :error, :warning
 
-  # before_action :decode_id
   before_action :set_locale
   before_action :authenticate_user!
-  # before_action :set_action_cable_identifier
-  before_action :set_active_company
   before_action :redirect_empty_params
+  # before_action :set_action_cable_identifier
 
   # rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
@@ -27,34 +25,15 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
-  # rescue_from CanCan::AccessDenied do |exception|
-  #   flash[:warning] = exception.message
-  #   redirect_to root_path
+  # def after_sign_up_path_for(user)
+  #
   # end
-  # raise CanCan::AccessDenied.new("You are not authorized to perform this action!", :custom_action, Project)
-
-  def after_sign_up_path_for(user)
-    company_url(user.active_company)
-  end
 
   def after_sign_out_path_for(*)
     new_user_session_path
   end
 
   protected
-
-  # Changes active company for user if provided
-  # Sets @active_company on Controller
-  # Redirects to complete_registration_path if no company exists for the current_user
-  def set_active_company
-    return if !current_user
-
-    if current_user.active_company
-      @active_company = current_user.active_company
-    elsif !['/logout', '/users/complete_registration'].include? request.path
-      redirect_to complete_registration_path
-    end
-  end
 
   def pagination_data(model)
     return if !model.respond_to? :total_pages
@@ -78,14 +57,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def decode_id
-    return if !params[:id]
-
-    id_parts = ApplicationRecord.decode_id(params[:id])
-    params[:id] = id_parts[:id]
-    params[:asset_type] = id_parts[:model]
-  end
 
   def set_locale
     locale = params[:locale].to_s.strip.to_sym

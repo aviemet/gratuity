@@ -24,16 +24,8 @@ RSpec.describe User do
   end
 
   describe "Associations" do
-    it { is_expected.to belong_to(:active_company).optional }
     it { is_expected.to have_many(:people) }
-    it { is_expected.to have_many(:companies) }
     it { is_expected.to have_one(:person) }
-
-    it "returns the person record associated with the active company" do
-      user = build(:user)
-      user.people << build(:person)
-      expect(user.person).to eq(user.company.people.first)
-    end
   end
 
   describe "Serializer" do

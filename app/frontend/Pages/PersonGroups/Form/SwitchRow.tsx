@@ -14,7 +14,7 @@ interface ISwitchRowProps {
 }
 
 const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
-	const { isCompanyAdmin, columns } = usePermissionsForm()
+	const { columns } = usePermissionsForm()
 	const { data, setData, getData } = useForm<FormData>()
 
 	const columnProperties = useCallback(() => {
@@ -36,11 +36,6 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 		})
 	}, [data?.person_group?.permissions[model]])
 
-	let checked = {}
-	if(isCompanyAdmin) {
-		checked = { checked: true }
-	}
-
 	return (
 		<NestedFields model={ model }>
 			<Table.Row>
@@ -49,7 +44,6 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 						onChange={ e => setRow(`person_group.permissions.${model}`, e.target.checked) }
 						checked={ allChecked }
 						indeterminate={ indeterminate }
-						disabled={ isCompanyAdmin }
 					/>
 				</Table.Cell>
 				<Table.Cell>{ label }</Table.Cell>
@@ -58,8 +52,6 @@ const SwitchRow = ({ label, model, permissions }: ISwitchRowProps) => {
 						<Switch
 							name={ permission }
 							field={ false }
-							disabled={ isCompanyAdmin }
-							{ ...checked }
 						/>
 					</Table.Cell>
 				) ) }</>

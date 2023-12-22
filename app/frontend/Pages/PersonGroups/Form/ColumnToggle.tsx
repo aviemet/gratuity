@@ -4,16 +4,13 @@ import { useForm } from 'use-inertia-form'
 import { type FormData, type TPermissions } from '.'
 import tableRows from './tableRows'
 import { useCheckboxState } from '@/lib/hooks'
-import { usePermissionsForm } from './PermissionsForm'
 
 interface IColumnToggleProps {
 	permission: keyof TPermissions
 }
 
 const ColumnToggle = ({ permission }: IColumnToggleProps) => {
-	const { isCompanyAdmin } = usePermissionsForm()
 	const { data, setData, getData } = useForm<FormData>()
-	// const checkboxRef = useRef<HTMLInputElement>(null)
 
 	const columnProperties = useCallback(() => {
 		return tableRows.reduce(({ length, selected }, row) => {
@@ -40,9 +37,7 @@ const ColumnToggle = ({ permission }: IColumnToggleProps) => {
 
 	return (
 		<Checkbox
-			// ref={ checkboxRef }
 			onChange={ handleChange  }
-			disabled={ isCompanyAdmin }
 			checked={ allChecked }
 			indeterminate={ indeterminate }
 			mr={ 6 }

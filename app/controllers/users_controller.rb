@@ -66,13 +66,6 @@ class UsersController < ApplicationController
     person.user = current_user
 
     current_user.transaction do
-      company = Company::AsSetup.create!(params[:company])
-      company = Company.find(company.id)
-
-      current_user.add_role :admin, company
-      current_user.active_company = company
-
-      current_user.person.company = company
       current_user.person.save
 
       if current_user.save
@@ -104,10 +97,10 @@ class UsersController < ApplicationController
   private
 
   def sortable_fields
-    %w(email active person.name active_company.name).freeze
+    %w(email active person.name).freeze
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :active_company, :active, :user_preferences, person: [:first_name, :last_name], company: [:name])
+    params.require(:user).permit(:email, :password, :active, :user_preferences, person: [:first_name, :last_name])
   end
 end

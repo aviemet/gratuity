@@ -4,7 +4,7 @@ require_relative '../support/devise'
 RSpec.describe "Users", :inertia do
   let(:password) { '$trongPassw0rd!' }
   let(:confirmed_user) { create(:user, password: password) }
-  let(:unconfirmed_user) { create(:user, password: password, company: false, person: false, confirmed: false) }
+  let(:unconfirmed_user) { create(:user, password: password, person: false, confirmed: false) }
 
   def confirmed_user_params
     { user: {
@@ -67,7 +67,7 @@ RSpec.describe "Users", :inertia do
 
     context "invalid credentials" do
       it "redirects back to the login page" do
-        user = create(:user, password: password, confirmed: true, company: false, person: false)
+        user = create(:user, password: password, confirmed: true, person: false)
         post user_session_url, params: { user: { email: user.email, password: 'Wrong1!' } }
         expect_inertia.to render_component 'Public/Devise/Login'
       end
@@ -75,27 +75,6 @@ RSpec.describe "Users", :inertia do
   end
 
   describe "POST /users/complete_registration" do
-    context "confirmed user without company or Person" do
-
-      it "creates a Person and Company record for the new user" do
-        user = create(:user, password: password, confirmed: true, company: false, person: false)
-        sign_in user
-
-        company_name = Faker::Company.name
-        expect {
-          post save_complete_registration_url, params: {
-            company: {
-              name: company_name
-            },
-            person: {
-              first_name: Faker::Name.first_name,
-              last_name: Faker::Name.last_name,
-            }
-          }
-        }.to change(Person, :count).by(1)
-          .and change(Company, :count).by(1)
-      end
-    end
   end
 
   ## APP VIEWS TESTS ##

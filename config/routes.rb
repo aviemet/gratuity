@@ -38,10 +38,6 @@ Rails.application.routes.draw do
   get "users/complete_registration" => "users#complete_registration", as: :complete_registration
   post "users/complete_registration" => "users#save_complete_registration", as: :save_complete_registration
 
-  # Async route to set active company
-  # TODO: Whatever uses this should opt to use /api/users/update instead
-  patch "users/:id/set_active_company/:company_id" => "users#set_active_company", as: :set_active_company
-
   # RESOURCEFUL PATHS #
 
   draw(:api)

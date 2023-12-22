@@ -14,14 +14,7 @@ const UiFrameworkProvider = ({ children }: { children: React.ReactNode }) => {
 	/**
 	 * Primary color customization
 	 */
-	const { primaryColor, setPrimaryColor } = useLayoutStore()
-
-	useEffect(() => {
-		const companyColor = auth?.user?.active_company?.settings?.primary_color || primaryColor
-		if(companyColor === primaryColor) return
-
-		setPrimaryColor(companyColor)
-	}, [auth?.user?.active_company?.settings?.primary_color])
+	const { primaryColor } = useLayoutStore()
 
 	const theme = useMemo(() => createTheme({ ...themeObject, primaryColor }), [primaryColor])
 

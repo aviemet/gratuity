@@ -1,8 +1,6 @@
 class PersonGroupsController < ApplicationController
-  include OwnableConcern
-
-  expose :person_groups, -> { @active_company.person_groups.includes_associated }
-  expose :person_group, id: ->{ params[:slug] }, scope: ->{ @active_company.person_groups.includes_associated }, find_by: :slug
+  expose :person_groups, -> { PersonGroups.includes_associated }
+  expose :person_group, id: ->{ params[:slug] }, scope: ->{ PersonGroups.includes_associated }, find_by: :slug
 
   # GET /person_group
   def index
@@ -16,6 +14,7 @@ class PersonGroupsController < ApplicationController
   # GET /person_group/:slug
   def show
     authorize person_group
+
     render inertia: "PersonGroups/Show", props: {
       person_group: -> { person_group.render(view: :show) },
       people: InertiaRails.lazy(-> {
@@ -34,6 +33,7 @@ class PersonGroupsController < ApplicationController
   # GET /person_group/new
   def new
     authorize PersonGroup
+
     render inertia: "PersonGroups/New"
   end
 
@@ -47,8 +47,8 @@ class PersonGroupsController < ApplicationController
   # POST /person_group
   def create
     authorize PersonGroup
+
     person_group = PersonGroup.new(person_group_params.except(:permissions))
-    person_group.company = @active_company
     person_group.save
 
     if person_group.persisted?
@@ -63,6 +63,7 @@ class PersonGroupsController < ApplicationController
   # PATCH/PUT /person_group/:slug
   def update
     authorize person_group
+
     if person_group.update(person_group_params.except(:permissions))
       person_group.set_permissions(person_group_params[:permissions])
 
@@ -75,6 +76,7 @@ class PersonGroupsController < ApplicationController
   # DELETE /person_group/:slug
   def destroy
     authorize person_group
+
     person_group.destroy
     redirect_to person_groups_url, notice: 'Group was successfully destroyed.'
   end
@@ -84,20 +86,6 @@ class PersonGroupsController < ApplicationController
   def person_group_params
     params.require(:person_group).permit(
       :name, :description, permissions: [
-        company:      [:admin],
-        item:         [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        accessory:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        component:    [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        consumable:   [:index, :show, :create, :update, :delete, :checkout],
-        license:      [:index, :show, :create, :update, :delete, :checkout, :checkin],
-        network:      [:index, :show, :create, :update, :delete],
-        vendor:       [:index, :show, :create, :update, :delete],
-        contract:     [:index, :show, :create, :update, :delete],
-        category:     [:index, :show, :create, :update, :delete],
-        model:        [:index, :show, :create, :update, :delete],
-        manufacturer: [:index, :show, :create, :update, :delete],
-        department:   [:index, :show, :create, :update, :delete],
-        location:     [:index, :show, :create, :update, :delete],
         person:       [:index, :show, :create, :update, :delete],
         user:         [:index, :show, :create, :update, :delete],
       ],

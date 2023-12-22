@@ -21,7 +21,7 @@ RSpec.describe "/people" do
 
     context "index page" do
       it "lists all people" do
-        person = create(:person, company: @admin.active_company)
+        person = create(:person)
 
         get people_url
 
@@ -32,8 +32,8 @@ RSpec.describe "/people" do
 
     context "index page with search params" do
       it "returns a filtered list of people" do
-        person1 = create(:person, { first_name: "Include", company: @admin.active_company })
-        person2 = create(:person, { first_name: "Exclue", company: @admin.active_company })
+        person1 = create(:person, { first_name: "Include" })
+        person2 = create(:person, { first_name: "Exclue" })
 
         get people_url, params: { search: person1.first_name }
 
@@ -53,7 +53,7 @@ RSpec.describe "/people" do
 
     context "edit page" do
       it "displays form to edit a person" do
-        person = create(:person, company: @admin.active_company)
+        person = create(:person)
 
         get edit_person_url(person)
 
@@ -63,7 +63,7 @@ RSpec.describe "/people" do
 
     context "show page" do
       it "renders" do
-        person = create(:person, company: @admin.active_company)
+        person = create(:person)
         get person_url({ id: person.id })
         expect(response).to have_http_status(:ok)
       end
@@ -102,7 +102,7 @@ RSpec.describe "/people" do
     context "with valid parameters" do
       it "updates the requested person and redirects to the show page" do
         name_change = "Changed"
-        person = create(:person, company: @admin.active_company)
+        person = create(:person)
         patch person_url(person), params: { person: { first_name: name_change } }
 
         person.reload
@@ -114,7 +114,7 @@ RSpec.describe "/people" do
 
     context "with invalid parameters" do
       it "redirects back to the edit person page" do
-        person = create(:person, company: @admin.active_company)
+        person = create(:person)
         patch person_url(person), params: invalid_attributes
         expect(response).to redirect_to edit_person_url(person)
       end
@@ -125,14 +125,14 @@ RSpec.describe "/people" do
     login_admin
 
     it "destroys the requested person" do
-      person = create(:person, company: @admin.active_company)
+      person = create(:person)
       expect {
         delete person_url(person)
       }.to change(Person, :count).by(-1)
     end
 
     it "redirects to the people list" do
-      person = create(:person, company: @admin.active_company)
+      person = create(:person)
       delete person_url(person)
       expect(response).to redirect_to(people_url)
     end

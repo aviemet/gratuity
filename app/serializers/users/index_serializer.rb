@@ -18,7 +18,6 @@ class Users::IndexSerializer < ApplicationSerializer
     :locked_at,
     :created_at,
     :updated_at,
-    :active_company_id,
     :active,
     table_preferences: { type: "IUserTablePreferences" },
     user_preferences: { type: "IUserPreferences" },
@@ -28,6 +27,4 @@ class Users::IndexSerializer < ApplicationSerializer
   has_many :activities, serializer: ActivitySerializer
   has_many :people, serializer: PersonSerializer
   has_one :person, serializer: PersonSerializer
-  belongs_to :active_company, serializer: CompanySerializer
-  has_many :companies, serializer: CompanySerializer
 end

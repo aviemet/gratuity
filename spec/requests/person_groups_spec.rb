@@ -21,7 +21,7 @@ RSpec.describe "/person_groups" do
 
     context "index page" do
       it "lists all person_groups" do
-        person_group = create(:person_group, { company: User.first.active_company })
+        person_group = create(:person_group)
 
         get person_groups_url
 
@@ -40,7 +40,7 @@ RSpec.describe "/person_groups" do
 
     context "edit page" do
       it "displays form to edit a person_group" do
-        person_group = create(:person_group, company: User.first.active_company)
+        person_group = create(:person_group)
 
         get edit_person_group_url(person_group)
 
@@ -50,7 +50,7 @@ RSpec.describe "/person_groups" do
 
     context "show page" do
       it "renders" do
-        person_group = create(:person_group, company: @admin.active_company)
+        person_group = create(:person_group)
         get person_group_url({ slug: person_group.slug })
         expect(response).to have_http_status(:ok)
       end
@@ -89,7 +89,7 @@ RSpec.describe "/person_groups" do
     context "with valid parameters" do
       it "updates the requested person_group and redirects to the show page" do
         name_change = "Changed"
-        person_group = create(:person_group, company: User.first.active_company )
+        person_group = create(:person_group )
         patch person_group_url(person_group.slug), params: { person_group: { name: name_change } }
 
         person_group.reload
@@ -101,7 +101,7 @@ RSpec.describe "/person_groups" do
 
     context "with invalid parameters" do
       it "redirects back to the edit person_group page" do
-        person_group = create(:person_group, company: User.first.active_company)
+        person_group = create(:person_group)
         patch person_group_url(person_group.slug), params: invalid_attributes
         expect(response).to redirect_to edit_person_group_url(person_group)
       end
@@ -112,14 +112,14 @@ RSpec.describe "/person_groups" do
     login_admin
 
     it "destroys the requested person_group" do
-      person_group = create(:person_group, company: User.first.active_company)
+      person_group = create(:person_group)
       expect {
         delete person_group_url({slug: person_group.slug})
       }.to change(PersonGroup, :count).by(-1)
     end
 
     it "redirects to the person_groups list" do
-      person_group = create(:person_group, company: User.first.active_company)
+      person_group = create(:person_group)
       delete person_group_url({ slug: person_group.slug })
       expect(response).to redirect_to(person_groups_url)
     end

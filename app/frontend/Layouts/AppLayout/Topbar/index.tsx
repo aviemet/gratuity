@@ -1,5 +1,4 @@
 import React from 'react'
-import ActiveCompanyDropdown from './ActiveCompanyDropdown'
 import { useLayoutStore } from '@/lib/store'
 import QuickNewMenu from './QuickNewMenu'
 import { Box, AppShell, Burger, Group } from '@mantine/core'
@@ -27,10 +26,6 @@ const Topbar = () => {
 					size="sm"
 					color="white"
 				/>
-
-				<Box style={ { flex: 1 } }>
-					<ActiveCompanyDropdown user={ user } />
-				</Box>
 
 				<Group>
 					<QuickNewMenu />

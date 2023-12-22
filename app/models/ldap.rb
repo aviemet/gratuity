@@ -8,6 +8,4 @@ class Ldap < ApplicationRecord
   validates :host, presence: true
   validates :port, presence: true
   validates :username, presence: true
-
-  belongs_to :company
 end

@@ -1,0 +1,17 @@
+class CreateLdaps < ActiveRecord::Migration[7.0]
+  def change
+    create_table :ldaps do |t|
+      t.string :name, null: false
+      t.string :host
+      t.string :port
+      t.string :domain
+      t.string :username
+      t.string :password
+      t.string :tree_base
+      t.string :user_search
+      t.string :sync_interval
+
+      t.timestamps
+    end
+  end
+end

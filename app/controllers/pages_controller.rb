@@ -6,7 +6,6 @@ class PagesController < ApplicationController
       .last(10)
 
     render inertia: "Pages/Dashboard", props: {
-      company: @active_company.render(view: :show),
       activities: Activities::DashboardSerializer.render(activities)
     }
   end

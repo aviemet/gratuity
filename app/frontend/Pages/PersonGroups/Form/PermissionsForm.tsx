@@ -11,7 +11,6 @@ import { emptyGroup } from './formData'
 import { FormData } from '.'
 
 const [usePermissionsForm, PermissionsFormContext] = createContext<{
-	isCompanyAdmin: boolean
 	columns: number
 }>()
 export { usePermissionsForm }
@@ -27,7 +26,6 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 	const { auth: { user } } = usePageProps()
 
 	const formData = { person_group: (person_group ? exclude(person_group, ['id', 'slug']) : emptyGroup) } as FormData
-	const [isCompanyAdmin, setIsCompanyAdmin] = useState<boolean>(formData.person_group.permissions?.company?.admin || false)
 
 	const longestPermissionsArray = useCallback(() => {
 		return tableRows.reduce((length, row) => {
@@ -35,32 +33,13 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 		}, 0)
 	}, [tableRows])
 
-	const handleSubmit = (form: UseFormProps<FormData>) => {
-		if(form.getData('person_group.permissions.company.admin')) {
-			form.transform(data => {
-				const clonedData = structuredClone(data)
-				const keys = Object.keys(clonedData.person_group.permissions)
-
-				keys.forEach((key) => {
-					if(key !== 'company') {
-						clonedData.person_group.permissions[key] = {}
-					}
-				})
-
-				return clonedData
-			})
-		}
-		onSubmit?.(form)
-	}
-
 	return (
-		<PermissionsFormContext value={ { isCompanyAdmin, columns: longestPermissionsArray() } }>
+		<PermissionsFormContext value={ { columns: longestPermissionsArray() } }>
 			<Form
 				model="person_group"
 				data={ formData }
 				to={ to }
 				method={ method }
-				onSubmit={ handleSubmit }
 				railsAttributes={ false }
 				remember={ false }
 			>
@@ -69,11 +48,6 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 				<Textarea name="description" label="Description" />
 
 				<FormGroup legend="Permissions" model="permissions">
-					<Switch
-						name="company.admin"
-						label={ `Set as administrator group for ${user.active_company?.name}` }
-						onChange={ (checked) => setIsCompanyAdmin(checked) }
-					/>
 
 					<Table mt={ 32 }>
 						<Table.Head>
@@ -94,12 +68,6 @@ const GroupForm = ({ to, method = 'post', onSubmit, person_group = emptyGroup }:
 								</Table.Cell>
 								<Table.Cell>
 									<ColumnToggle permission="delete" /> Delete
-								</Table.Cell>
-								<Table.Cell>
-									<ColumnToggle permission="checkout" /> Checkout
-								</Table.Cell>
-								<Table.Cell>
-									<ColumnToggle permission="checkin" /> Checkin
 								</Table.Cell>
 							</Table.Row>
 						</Table.Head>

@@ -7,16 +7,6 @@ declare global {
 
 	type TInputType = 'button'|'checkbox'|'color'|'currency'|'date'|'datetime-local'|'email'|'file'|'hidden'|'image'|'month'|'number'|'password'|'radio'|'range'|'reset'|'search'|'select'|'submit'|'tel'|'text'|'textarea'|'time'|'url'
 
-	// type TPermissions = {
-	// 	index?: boolean
-	// 	show?: boolean
-	// 	create?: boolean
-	// 	update?: boolean
-	// 	delete?: boolean
-	// 	checkout?: boolean
-	// 	checkin?: boolean
-	// }
-
 	type PaginatedModel<T> = {
 		data: T
 		pagination: Schema.Pagination
@@ -24,28 +14,20 @@ declare global {
 
 	type FlashMessage = Record<'success' | 'alert' | 'info' | 'warning', string>
 
+}
+
+	// type TPermissions = {
+	// 	index?: boolean
+	// 	show?: boolean
+	// 	create?: boolean
+	// 	update?: boolean
+	// 	delete?: boolean
+	// }
+
+	
 	// interface PersonGroupPermissions extends Schema.PersonGroup {
-	// 	permissions: {
-	// 		company: {
-	// 			admin?: boolean
-	// 		}
-	// 		item: TPermissions | []
-	// 		accessory: TPermissions | []
-	// 		component: TPermissions | []
-	// 		consumable: TPermissions | []
-	// 		license: TPermissions | []
-	// 		network: TPermissions | []
-	// 		vendor: TPermissions | []
-	// 		contract: TPermissions | []
-	// 		category: TPermissions | []
-	// 		model: TPermissions | []
-	// 		manufacturer: TPermissions | []
-	// 		department: TPermissions | []
-	// 		location: TPermissions | []
 	// 		person: TPermissions | []
 	// 		user: TPermissions | []
 	// 	}
 	// }
 	// }
-
-}
