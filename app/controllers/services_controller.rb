@@ -1,13 +1,14 @@
 class ServicesController < ApplicationController
   include Searchable
 
-  expose :services, -> { search(services.includes_associated, sortable_fields) }
-    expose :service, scope: ->{ services }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :services, -> { search(Service.includes_associated, sortable_fields) }
+  expose :service, scope: ->{ Service }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /services
   def index
     authorize services
-    render inertia: "Service/Index", props: {
+
+    render inertia: "Services/Index", props: {
       services: -> { services.render(view: :index) }
     }
   end
@@ -15,7 +16,7 @@ class ServicesController < ApplicationController
   # GET /services/:id
   def show
     authorize service
-    render inertia: "Service/Show", props: {
+    render inertia: "Services/Show", props: {
       service: -> { service.render(view: :show) }
     }
   end
@@ -23,7 +24,7 @@ class ServicesController < ApplicationController
   # GET /services/new
   def new
     authorize Service.new
-    render inertia: "Service/New", props: {
+    render inertia: "Services/New", props: {
       service: Service.new.render(view: :form_data)
     }
   end
@@ -31,7 +32,7 @@ class ServicesController < ApplicationController
   # GET /services/:id/edit
   def edit
     authorize service
-    render inertia: "Service/Edit", props: {
+    render inertia: "Services/Edit", props: {
       service: service.render(view: :edit)
     }
   end
@@ -66,7 +67,7 @@ class ServicesController < ApplicationController
   private
 
   def sortable_fields
-    %w(date period_id service_template_id).freeze
+    %w(date period.name service_template.name).freeze
   end
 
   def service_params
