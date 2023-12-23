@@ -1,5 +1,5 @@
 class Services::ShowSerializer < ApplicationSerializer
-  object_as :serializer
+  object_as :service
 
   attributes(
     :id,

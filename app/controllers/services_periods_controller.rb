@@ -1,13 +1,13 @@
 class ServicesPeriodsController < ApplicationController
   include Searchable
 
-  expose :services_periods, -> { search(services_periods.includes_associated, sortable_fields) }
-    expose :services_period, scope: ->{ services_periods }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :services_periods, -> { search(ServicesPeriod.includes_associated, sortable_fields) }
+  expose :services_period, scope: ->{ ServicesPeriod }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /services_periods
   def index
     authorize services_periods
-    render inertia: "ServicesPeriod/Index", props: {
+    render inertia: "ServicesPeriods/Index", props: {
       services_periods: -> { services_periods.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class ServicesPeriodsController < ApplicationController
   # GET /services_periods/:id
   def show
     authorize services_period
-    render inertia: "ServicesPeriod/Show", props: {
+    render inertia: "ServicesPeriods/Show", props: {
       services_period: -> { services_period.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class ServicesPeriodsController < ApplicationController
   # GET /services_periods/new
   def new
     authorize ServicesPeriod.new
-    render inertia: "ServicesPeriod/New", props: {
+    render inertia: "ServicesPeriods/New", props: {
       services_period: ServicesPeriod.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class ServicesPeriodsController < ApplicationController
   # GET /services_periods/:id/edit
   def edit
     authorize services_period
-    render inertia: "ServicesPeriod/Edit", props: {
+    render inertia: "ServicesPeriods/Edit", props: {
       services_period: services_period.render(view: :edit)
     }
   end

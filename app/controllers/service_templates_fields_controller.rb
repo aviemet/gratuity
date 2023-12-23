@@ -1,13 +1,13 @@
 class ServiceTemplatesFieldsController < ApplicationController
   include Searchable
 
-  expose :service_templates_fields, -> { search(service_templates_fields.includes_associated, sortable_fields) }
-    expose :service_templates_field, scope: ->{ service_templates_fields }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :service_templates_fields, -> { search(ServiceTemplatesField.includes_associated, sortable_fields) }
+  expose :service_templates_field, scope: ->{ ServiceTemplatesField }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /service_templates_fields
   def index
     authorize service_templates_fields
-    render inertia: "ServiceTemplatesField/Index", props: {
+    render inertia: "ServiceTemplatesFields/Index", props: {
       service_templates_fields: -> { service_templates_fields.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class ServiceTemplatesFieldsController < ApplicationController
   # GET /service_templates_fields/:id
   def show
     authorize service_templates_field
-    render inertia: "ServiceTemplatesField/Show", props: {
+    render inertia: "ServiceTemplatesFields/Show", props: {
       service_templates_field: -> { service_templates_field.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class ServiceTemplatesFieldsController < ApplicationController
   # GET /service_templates_fields/new
   def new
     authorize ServiceTemplatesField.new
-    render inertia: "ServiceTemplatesField/New", props: {
+    render inertia: "ServiceTemplatesFields/New", props: {
       service_templates_field: ServiceTemplatesField.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class ServiceTemplatesFieldsController < ApplicationController
   # GET /service_templates_fields/:id/edit
   def edit
     authorize service_templates_field
-    render inertia: "ServiceTemplatesField/Edit", props: {
+    render inertia: "ServiceTemplatesFields/Edit", props: {
       service_templates_field: service_templates_field.render(view: :edit)
     }
   end

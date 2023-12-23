@@ -1,4 +1,4 @@
-class Services::IndexSerializer < ApplicationSerializer
+class Services::EditSerializer < ApplicationSerializer
   object_as :service
 
   attributes(

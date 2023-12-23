@@ -1,7 +1,10 @@
 class ServicesController < ApplicationController
   include Searchable
 
-  expose :services, -> { search(Service.includes_associated, sortable_fields) }
+  expose :services, -> { search(
+    Service.includes_associated,
+    sortable_fields,
+  ) }
   expose :service, scope: ->{ Service }, find: ->(id, scope){ scope.includes_associated.find(id) }
 
   # GET /services
@@ -13,11 +16,14 @@ class ServicesController < ApplicationController
     }
   end
 
-  # GET /services/:id
+  # GET /services/:date
   def show
     authorize service
+
+    service_periods = Service.where(date: Date.parse(params[:date]))
+
     render inertia: "Services/Show", props: {
-      service: -> { service.render(view: :show) }
+      services: -> { service_periods.render(view: :show) }
     }
   end
 

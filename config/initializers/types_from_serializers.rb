@@ -3,6 +3,7 @@ if Rails.env.development?
     config.base_serializers = ["ApplicationSerializer"]
     config.global_types.merge(["TAssignToable", "TAssignable"])
     config.sql_to_typescript_type_mapping.update(
+      time: "Date",
       json: "Record<string, string>",
       jsonb: "Record<string, string>",
     )

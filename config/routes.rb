@@ -61,7 +61,8 @@ Rails.application.routes.draw do
   resources :person_groups
   resources :service_templates_fields
   resources :services_periods
-  resources :services
+  resources :services, except: [:show]
+  resources :services, param: :date, only: [:show]
   resources :service_templates
   resources :rules
   resources :fields

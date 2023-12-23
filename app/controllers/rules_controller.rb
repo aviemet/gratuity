@@ -1,13 +1,13 @@
 class RulesController < ApplicationController
   include Searchable
 
-  expose :rules, -> { search(rules.includes_associated, sortable_fields) }
-    expose :rule, scope: ->{ rules }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :rules, -> { search(Rule.includes_associated, sortable_fields) }
+  expose :rule, scope: ->{ Rule }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /rules
   def index
     authorize rules
-    render inertia: "Rule/Index", props: {
+    render inertia: "Rules/Index", props: {
       rules: -> { rules.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class RulesController < ApplicationController
   # GET /rules/:id
   def show
     authorize rule
-    render inertia: "Rule/Show", props: {
+    render inertia: "Rules/Show", props: {
       rule: -> { rule.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class RulesController < ApplicationController
   # GET /rules/new
   def new
     authorize Rule.new
-    render inertia: "Rule/New", props: {
+    render inertia: "Rules/New", props: {
       rule: Rule.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class RulesController < ApplicationController
   # GET /rules/:id/edit
   def edit
     authorize rule
-    render inertia: "Rule/Edit", props: {
+    render inertia: "Rules/Edit", props: {
       rule: rule.render(view: :edit)
     }
   end

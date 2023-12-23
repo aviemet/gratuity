@@ -1,13 +1,13 @@
 class PeriodsController < ApplicationController
   include Searchable
 
-  expose :periods, -> { search(periods.includes_associated, sortable_fields) }
-    expose :period, scope: ->{ periods }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :periods, -> { search(Period.includes_associated, sortable_fields) }
+  expose :period, scope: ->{ Period }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /periods
   def index
     authorize periods
-    render inertia: "Period/Index", props: {
+    render inertia: "Periods/Index", props: {
       periods: -> { periods.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class PeriodsController < ApplicationController
   # GET /periods/:id
   def show
     authorize period
-    render inertia: "Period/Show", props: {
+    render inertia: "Periods/Show", props: {
       period: -> { period.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class PeriodsController < ApplicationController
   # GET /periods/new
   def new
     authorize Period.new
-    render inertia: "Period/New", props: {
+    render inertia: "Periods/New", props: {
       period: Period.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class PeriodsController < ApplicationController
   # GET /periods/:id/edit
   def edit
     authorize period
-    render inertia: "Period/Edit", props: {
+    render inertia: "Periods/Edit", props: {
       period: period.render(view: :edit)
     }
   end

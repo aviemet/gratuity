@@ -2,17 +2,17 @@
 class <%= controller_class_name %>Controller < ApplicationController
   include Searchable
 
-  expose :<%= plural_table_name %>, -> { search(<%= plural_table_name %>.includes_associated, sortable_fields) }
+  expose :<%= plural_table_name %>, -> { search(<%= class_name %>.includes_associated, sortable_fields) }
   <% if attributes.include?(:slug) -%>
-  expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ <%= plural_table_name %>.includes_associated }, find_by: :slug
+  expose :<%= singular_table_name %>, id: ->{ params[:slug] }, scope: ->{ <%= class_name %>.includes_associated }, find_by: :slug
   <% else -%>
-  expose :<%= singular_table_name %>, scope: ->{ <%= plural_table_name %> }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :<%= singular_table_name %>, scope: ->{ <%= class_name %> }, find: ->(id, scope){ scope.includes_associated.find(id) }
   <% end -%>
 
   # GET <%= route_url %>
   def index
     authorize <%= plural_table_name %>
-    render inertia: "<%= class_name %>/Index", props: {
+    render inertia: "<%= class_name.pluralize %>/Index", props: {
       <%= plural_table_name %>: -> { <%= plural_table_name %>.render(view: :index) }
     }
   end
@@ -20,7 +20,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>/:id
   def show
     authorize <%= singular_table_name %>
-    render inertia: "<%= class_name %>/Show", props: {
+    render inertia: "<%= class_name.pluralize %>/Show", props: {
       <%= singular_table_name %>: -> { <%= singular_table_name %>.render(view: :show) }
     }
   end
@@ -28,7 +28,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>/new
   def new
     authorize <%= orm_class.build(class_name) %>
-    render inertia: "<%= class_name %>/New", props: {
+    render inertia: "<%= class_name.pluralize %>/New", props: {
       <%= singular_table_name %>: <%= orm_class.build(class_name) %>.render(view: :form_data)
     }
   end
@@ -36,7 +36,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>/:id/edit
   def edit
     authorize <%= singular_table_name %>
-    render inertia: "<%= class_name %>/Edit", props: {
+    render inertia: "<%= class_name.pluralize %>/Edit", props: {
       <%= singular_table_name %>: <%= singular_table_name %>.render(view: :edit)
     }
   end

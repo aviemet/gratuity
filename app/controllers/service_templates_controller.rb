@@ -1,13 +1,13 @@
 class ServiceTemplatesController < ApplicationController
   include Searchable
 
-  expose :service_templates, -> { search(service_templates.includes_associated, sortable_fields) }
-    expose :service_template, scope: ->{ service_templates }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :service_templates, -> { search(ServiceTemplate.includes_associated, sortable_fields) }
+  expose :service_template, scope: ->{ ServiceTemplate }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /service_templates
   def index
     authorize service_templates
-    render inertia: "ServiceTemplate/Index", props: {
+    render inertia: "ServiceTemplates/Index", props: {
       service_templates: -> { service_templates.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class ServiceTemplatesController < ApplicationController
   # GET /service_templates/:id
   def show
     authorize service_template
-    render inertia: "ServiceTemplate/Show", props: {
+    render inertia: "ServiceTemplates/Show", props: {
       service_template: -> { service_template.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class ServiceTemplatesController < ApplicationController
   # GET /service_templates/new
   def new
     authorize ServiceTemplate.new
-    render inertia: "ServiceTemplate/New", props: {
+    render inertia: "ServiceTemplates/New", props: {
       service_template: ServiceTemplate.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class ServiceTemplatesController < ApplicationController
   # GET /service_templates/:id/edit
   def edit
     authorize service_template
-    render inertia: "ServiceTemplate/Edit", props: {
+    render inertia: "ServiceTemplates/Edit", props: {
       service_template: service_template.render(view: :edit)
     }
   end

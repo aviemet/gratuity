@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   end
 
   create_table "fields", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "type"
     t.text "description"
     t.datetime "created_at", null: false
@@ -76,9 +76,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   end
 
   create_table "periods", force: :cascade do |t|
-    t.string "name"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "name", null: false
+    t.time "start_time", null: false
+    t.time "end_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -130,7 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   end
 
   create_table "rules", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.bigint "field_id", null: false
     t.string "operator"
     t.decimal "operation_value"
@@ -157,7 +157,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.date "date"
+    t.date "date", null: false
     t.bigint "period_id", null: false
     t.bigint "service_template_id", null: false
     t.datetime "created_at", null: false

@@ -1,13 +1,13 @@
 class FieldsController < ApplicationController
   include Searchable
 
-  expose :fields, -> { search(fields.includes_associated, sortable_fields) }
-    expose :field, scope: ->{ fields }, find: ->(id, scope){ scope.includes_associated.find(id) }
-  
+  expose :fields, -> { search(Field.includes_associated, sortable_fields) }
+  expose :field, scope: ->{ Field }, find: ->(id, scope){ scope.includes_associated.find(id) }
+
   # GET /fields
   def index
     authorize fields
-    render inertia: "Field/Index", props: {
+    render inertia: "Fields/Index", props: {
       fields: -> { fields.render(view: :index) }
     }
   end
@@ -15,7 +15,7 @@ class FieldsController < ApplicationController
   # GET /fields/:id
   def show
     authorize field
-    render inertia: "Field/Show", props: {
+    render inertia: "Fields/Show", props: {
       field: -> { field.render(view: :show) }
     }
   end
@@ -23,7 +23,7 @@ class FieldsController < ApplicationController
   # GET /fields/new
   def new
     authorize Field.new
-    render inertia: "Field/New", props: {
+    render inertia: "Fields/New", props: {
       field: Field.new.render(view: :form_data)
     }
   end
@@ -31,7 +31,7 @@ class FieldsController < ApplicationController
   # GET /fields/:id/edit
   def edit
     authorize field
-    render inertia: "Field/Edit", props: {
+    render inertia: "Fields/Edit", props: {
       field: field.render(view: :edit)
     }
   end

@@ -45,6 +45,7 @@ export {
 	MdOutlineScreenSearchDesktop as ModelsIcon,
 	MdOutlineDelete as TrashIcon,
 	MdCalendarMonth as CalendarIcon,
+	MdOutlineViewList as TableViewIcon,
 } from 'react-icons/md'
 
 
