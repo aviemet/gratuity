@@ -12,6 +12,14 @@ export const wrapper = css`
 export const table = css`
 	width: 100%;
 
+	${vars.lightSelector} {
+		background-color: ${vars.colors.gray[2]};
+	}
+
+	${vars.darkSelector} {
+		background-color: ${vars.colors.dark[6]};
+	}
+
 	&.layout-fixed {
 		table-layout: fixed;
 	}
@@ -29,16 +37,16 @@ export const table = css`
 		${vars.lightSelector} {
 			background-color: ${vars.colors.gray[1]};
 
-			th:hover {
+			/* th:hover {
 				background-color: ${vars.colors.gray[1]};
-			}
+			} */
 		}
 		${vars.darkSelector} {
 			background-color: ${vars.colors.dark[7]};
 
-			th:hover {
+			/* th:hover {
 				background-color: ${vars.colors.black};
-			}
+			} */
 		}
 	}
 

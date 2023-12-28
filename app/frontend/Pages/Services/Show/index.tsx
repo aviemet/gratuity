@@ -10,11 +10,11 @@ interface IShowServiceProps {
 
 const ShowService = ({ services }: IShowServiceProps) => {
 	const { paths } = useLocation()
-	const title = `Service for ${formatter.date.english(paths[1])}`
+	const title = `Service for ${formatter.date.english(paths[1].replace('-', '/'))}`
 
 
 	console.log({ paths })
-	console.log({ services })
+	// console.log({ services })
 	return (
 		<Page title={title} breadcrumbs={[
 			{ title: 'Service', href: Routes.services() },
