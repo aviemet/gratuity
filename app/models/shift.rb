@@ -4,7 +4,9 @@ class Shift < ApplicationRecord
     :search,
     against: [:start_time, :end_time, :person, :position, :outlet],
     associated_against: {
-      person: [], position: [], outlet: [],
+      person: [:first_name, :middle_name, :last_name],
+      position: [:name],
+      outlet: [:name],
     },
     using: {
       tsearch: { prefix: true },
@@ -17,7 +19,6 @@ class Shift < ApplicationRecord
 
   belongs_to :person
   belongs_to :position
-  belongs_to :outlet
 
-  scope :includes_associated, -> { includes([:person, :position, :outlet]) }
+  scope :includes_associated, -> { includes([:person, :position]) }
 end

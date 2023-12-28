@@ -1,4 +1,6 @@
 class Person < ApplicationRecord
+  before_save :normalize_names
+
   multisearchable(
     against: [:first_name, :last_name],
     additional_attributes: ->(record) { { label: record.full_name } },
@@ -6,7 +8,7 @@ class Person < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:first_name, :last_name],
+    against: [:first_name, :middle_name, :last_name, :preferred_name],
     associated_against: {
       user: [:email]
     },
@@ -22,7 +24,9 @@ class Person < ApplicationRecord
   rolify
 
   belongs_to :user, optional: true
+  belongs_to :default_position, class_name: "Position", optional: true
 
+  has_many :shifts, dependent: :destroy
   has_many :person_group_assignments, dependent: :destroy
   has_many :groups, through: :person_group_assignments, source: :person_group
 
@@ -40,4 +44,13 @@ class Person < ApplicationRecord
   end
 
   alias :name :full_name
+
+  private
+
+  def normalize_names
+    parsed_name = Nameable::Latin.new.parse("#{first_name} #{self&.middle_name} #{self.last_name}")
+    self.first_name = parsed_name.first
+    self.middle_name = parsed_name.middle
+    self.last_name = parsed_name.last
+  end
 end

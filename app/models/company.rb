@@ -1,4 +1,5 @@
-class Position < ApplicationRecord
+class Company < ApplicationRecord
+
   pg_search_scope(
     :search,
     against: [:name, :slug],
@@ -8,12 +9,9 @@ class Position < ApplicationRecord
     },
   )
 
-  slug :name
-
   tracked
   resourcify
 
-  belongs_to :outlet
 
   scope :includes_associated, -> { includes([]) }
 end

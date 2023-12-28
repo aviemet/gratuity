@@ -586,6 +586,23 @@ export const cancelUserRegistration = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7
 
 /**
  * Generates rails route to
+ * /companies(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const companies = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"companies"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /companies/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const company = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/complete_registration(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -610,12 +627,30 @@ export const destroyUserSession = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"
 
 /**
  * Generates rails route to
+ * /companies/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editCompany = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /fields/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const editField = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"fields"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /outlets/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editOutlet = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"outlets"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -643,6 +678,15 @@ export const editPerson = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [
  * @returns {string} route path
  */
 export const editPersonGroup = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"person_groups"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /positions/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editPosition = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"positions"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
 
 /**
  * Generates rails route to
@@ -718,6 +762,15 @@ export const editSettingsLog = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{
 
 /**
  * Generates rails route to
+ * /shifts/:id/edit(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const editShift = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"shifts"],[2,[7,"/"],[2,[3,"id"],[2,[7,"/"],[2,[6,"edit"],[1,[2,[8,"."],[3,"format"]]]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/:id/edit(.:format)
  * @param {any} id
  * @param {object | undefined} options
@@ -760,11 +813,27 @@ export const fields = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"fie
 
 /**
  * Generates rails route to
+ * /companies/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newCompany = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"companies"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /fields/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
  */
 export const newField = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"fields"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /outlets/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newOutlet = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"outlets"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -789,6 +858,14 @@ export const newPerson = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"
  * @returns {string} route path
  */
 export const newPersonGroup = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"person_groups"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /positions/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newPosition = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"positions"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
 
 /**
  * Generates rails route to
@@ -856,6 +933,14 @@ export const newSettingsLog = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2
 
 /**
  * Generates rails route to
+ * /shifts/new(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const newShift = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"shifts"],[2,[7,"/"],[2,[6,"new"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
  * /users/new(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -912,6 +997,23 @@ export const newUserUnlock = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,
 
 /**
  * Generates rails route to
+ * /outlets/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const outlet = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"outlets"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /outlets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const outlets = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"outlets"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
  * /people(.:format)
  * @param {object | undefined} options
  * @returns {string} route path
@@ -960,6 +1062,23 @@ export const personGroup = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, 
  * @returns {string} route path
  */
 export const personGroups = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"person_groups"],[1,[2,[8,"."],[3,"format"]]]]]);
+
+/**
+ * Generates rails route to
+ * /positions/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const position = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"positions"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /positions(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const positions = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"positions"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to
@@ -1162,6 +1281,23 @@ export const settingsLog = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, 
  * @returns {string} route path
  */
 export const settingsLogs = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"settings"],[2,[7,"/"],[2,[6,"logs"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /shifts/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const shift = /*#__PURE__*/ __jsr.r({"id":{"r":true},"format":{}}, [2,[7,"/"],[2,[6,"shifts"],[2,[7,"/"],[2,[3,"id"],[1,[2,[8,"."],[3,"format"]]]]]]]);
+
+/**
+ * Generates rails route to
+ * /shifts(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const shifts = /*#__PURE__*/ __jsr.r({"format":{}}, [2,[7,"/"],[2,[6,"shifts"],[1,[2,[8,"."],[3,"format"]]]]]);
 
 /**
  * Generates rails route to

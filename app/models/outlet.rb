@@ -9,8 +9,15 @@ class Outlet < ApplicationRecord
     },
   )
 
+  slug :prefer_short_name_for_slug
+
+  def prefer_short_name_for_slug
+    short || name
+  end
+
   tracked
   resourcify
 
   scope :includes_associated, -> { includes([]) }
+
 end

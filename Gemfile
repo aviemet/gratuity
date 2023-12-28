@@ -39,6 +39,8 @@ gem "net-ldap", ">= 0.18.0"
 gem "foreman", "~> 0.87.2"
 gem "amazing_print", "~> 1.4"
 gem "delayed_job_active_record", "~> 4.1"
+gem "tod", "~> 3.1"
+gem "nameable", "~> 1.1"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data"
@@ -94,5 +96,3 @@ group :test do
   gem "simplecov", "~> 0.22.0"
   gem "pundit-matchers", "~> 3.0"
 end
-
-gem "tod", "~> 3.1"

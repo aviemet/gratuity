@@ -1,224 +1,151 @@
-if Rails.env.development?
-  if Position.count == 0
-    Position.create(
-      ["Server", "Bartender", "Busser", "Runner", "Sommelier", "Barback", "Barista"]
-      .map{ |_post| { name: pos } },
-    )
+if Rails.env.development? && (Position.count == 0)
+  outlet_r_n_b = Outlet.find(1)
+  pos_library = Outlet.find(2)
+  pos_musto = Outlet.find(3)
 
-    server = Position.find_by(slug: "server")
-    Person.create(
-      [
-        {
-          last_name: "SAMBU",
-          first_name: "MICHAEL",
-          default_position: server,
-        },
-        {
-          last_name: "PACHECO",
-          first_name: "JOEY",
-          default_position: server,
-        },
-        {
-          last_name: "PACHECO",
-          first_name: "JOEY",
-          default_position: server,
-        },
-        {
-          last_name: "DO ROSARIO",
-          first_name: "RENATA",
-          default_position: server,
-        },
-        {
-          last_name: "MEJIA",
-          first_name: "SANDRA",
-          default_position: server,
-        },
-        {
-          last_name: "LOPEZ",
-          first_name: "CARLOS",
-          default_position: server,
-        },
-        {
-          last_name: "BLANCHE",
-          first_name: "JOSEY",
-          default_position: server,
-        },
-        {
-          last_name: "YUCE",
-          first_name: "EMRE",
-          default_position: server,
-        },
-        {
-          last_name: "RODRIGUEZ",
-          first_name: "ARMANDO",
-          default_position: server,
-        },
-        {
-          last_name: "KARIMOVA",
-          first_name: "NAGIMA",
-          default_position: server,
-        },
-        {
-          last_name: "GREEN",
-          first_name: "GERALD",
-          default_position: server,
-        },
-        {
-          last_name: "KUSTOV",
-          first_name: "ARTEM",
-          default_position: server,
-        },
-        {
-          last_name: "WILLIAMS",
-          first_name: "JUSTIN",
-          default_position: server,
-        },
-        {
-          last_name: "TARI",
-          first_name: "SHYQUERI",
-          default_position: server,
-        },
-        {
-          last_name: "MIZRAK",
-          first_name: "SANI",
-          default_position: server,
-        },
-        {
-          last_name: "DO ROSARIO",
-          first_name: "RENATA",
-          default_position: server,
-        },
-        {
-          last_name: "MEJIA",
-          first_name: "SANDRA",
-          default_position: server,
-        },
-        {
-          last_name: "LOPEZ",
-          first_name: "CARLOS",
-          default_position: server,
-        },
-        {
-          last_name: "BLANCHE",
-          first_name: "JOSEY",
-          default_position: server,
-        },
-        {
-          last_name: "YUCE",
-          first_name: "EMRE",
-          default_position: server,
-        },
-        {
-          last_name: "RODRIGUEZ",
-          first_name: "ARMANDO",
-          default_position: server,
-        },
-        {
-          last_name: "KARIMOVA",
-          first_name: "NAGIMA",
-          default_position: server,
-        },
-        {
-          last_name: "GREEN",
-          first_name: "GERALD",
-          default_position: server,
-        },
-        {
-          last_name: "KUSTOV",
-          first_name: "ARTEM",
-          default_position: server,
-        },
-        {
-          last_name: "WILLIAMS",
-          first_name: "JUSTIN",
-          default_position: server,
-        },
-        {
-          last_name: "TARI",
-          first_name: "SHYQUERI",
-          default_position: server,
-        },
-        {
-          last_name: "MIZRAK",
-          first_name: "SANI",
-          default_position: server,
-        }
-      ],
-    )
+  Position.create([
+    {
+      name: "Server",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Bartender",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Busser",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Runner",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Sommeliers",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Bar Prep",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Barista",
+      outlet: outlet_r_n_b,
+    },
+    {
+      name: "Lead Barista",
+      outlet: outlet_r_n_b,
+    },
+  ])
 
-    busser = Postion.find_by(slug: "busser")
-    Person.create([
+  server = Position.find_by(slug: "server")
+  Person.create(
+    [
       {
-        last_name: "NAVARRETE ",
-        first_name: "YOLANDA",
-        default_position: busser,
+        last_name: "SAMBU",
+        first_name: "MICHAEL",
+        default_position: server,
       },
       {
-        last_name: "MENDOZA ",
-        first_name: "ROSA",
-        default_position: busser,
+        last_name: "DO ROSARIO",
+        first_name: "RENATA",
+        default_position: server,
       },
       {
-        last_name: "FLORES ",
-        first_name: "ALBERTO",
-        default_position: busser,
+        last_name: "MEJIA",
+        first_name: "SANDRA",
+        default_position: server,
       },
       {
-        last_name: "LOPEZ ",
-        first_name: "KEVIN",
-        default_position: busser,
+        last_name: "LOPEZ",
+        first_name: "CARLOS",
+        default_position: server,
       },
       {
-        last_name: "PEREZ ",
-        first_name: "HENRY",
-        default_position: busser,
+        last_name: "BLANCHE",
+        first_name: "JOSEY",
+        default_position: server,
       },
       {
-        last_name: "COUOH ",
-        first_name: "ANGEL",
-        default_position: busser,
+        last_name: "YUCE",
+        first_name: "EMRE",
+        default_position: server,
       },
       {
-        last_name: "CAMARA CHEL ",
-        first_name: "NOE",
-        default_position: busser,
+        last_name: "RODRIGUEZ",
+        first_name: "ARMANDO",
+        default_position: server,
       },
       {
-        last_name: "RODRIGUEZ ",
-        first_name: "RUCHI",
-        default_position: busser,
+        last_name: "KARIMOVA",
+        first_name: "NAGIMA",
+        default_position: server,
       },
-    ])
+      {
+        last_name: "GREEN",
+        first_name: "GERALD",
+        default_position: server,
+      },
+      {
+        last_name: "TARI",
+        first_name: "SHYQUERI",
+        default_position: server,
+      },
+      {
+        last_name: "MIZRAK",
+        first_name: "SANI",
+        default_position: server,
+      },
+    ],
+  )
 
-    runner = Position.find_by(slug: "runner")
-    Person.create([
-      {
-        last_name: "PEREZ",
-        first_name: "OSVIN",
-        default_position: runner
-      },
-      {
-        last_name: "VILLATORO",
-        first_name: "LILIANA",
-        default_position: runner
-      },
-      {
-        last_name: "MENDOZA",
-        first_name: "ROSA",
-        default_position: runner
-      },
-      {
-        last_name: "TEIXEIRA",
-        first_name: "JUSTIN",
-        default_position: runner
-      },
-      {
-        last_name: "NAVARRETE",
-        first_name: "YOLANDA",
-        default_position: runner
-      },
-    ])
-  end
+  busser = Position.find_by(slug: "busser")
+  Person.create([
+    {
+      last_name: "NAVARRETE",
+      first_name: "YOLANDA",
+      default_position: busser,
+    },
+    {
+      last_name: "FLORES",
+      first_name: "ALBERTO",
+      default_position: busser,
+    },
+    {
+      last_name: "LOPEZ",
+      first_name: "KEVIN",
+      default_position: busser,
+    },
+    {
+      last_name: "COUOH",
+      first_name: "ANGEL",
+      default_position: busser,
+    },
+    {
+      last_name: "CAMARA CHEL",
+      first_name: "NOE",
+      default_position: busser,
+    },
+    {
+      last_name: "RODRIGUEZ",
+      first_name: "RUCHI",
+      default_position: busser,
+    },
+  ])
+
+  runner = Position.find_by(slug: "runner")
+  Person.create([
+    {
+      last_name: "VILLATORO",
+      first_name: "LILIANA",
+      default_position: runner
+    },
+    {
+      last_name: "MENDOZA",
+      first_name: "ROSA",
+      default_position: runner
+    },
+  ])
 
   sommelier = Position.find_by(slug: "sommelier")
   Person.create([
@@ -289,11 +216,6 @@ if Rails.env.development?
     {
       last_name: "PEREZ",
       first_name: "HENRY",
-      default_position: barback,
-    },
-    {
-      last_name: "TEIXEIRA",
-      first_name: "JUSTIN",
       default_position: barback,
     },
     {

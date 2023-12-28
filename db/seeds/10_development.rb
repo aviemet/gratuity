@@ -15,10 +15,6 @@ if Rails.env.development?
     user.add_role :super_admin
   end
 
-  if Outlet.count == 0
-    Outlet.create(name: "717B")
-  end
-
   if Period.count == 0
     Period.create([
       {
@@ -58,5 +54,22 @@ if Rails.env.development?
         service_template: template,
       })
     end
+  end
+
+  if Outlet.count == 0
+    Outlet.create([
+      {
+        name: "Restaurants & Bars",
+        short: "R&B",
+      },
+      {
+        name: "Library",
+        short: "Lib"
+      },
+      {
+        name: "Musto",
+        short: "Mus"
+      },
+    ])
   end
 end

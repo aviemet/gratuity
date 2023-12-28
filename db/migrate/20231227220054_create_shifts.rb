@@ -5,7 +5,6 @@ class CreateShifts < ActiveRecord::Migration[7.1]
       t.datetime :end_time
       t.references :person, null: false, foreign_key: true
       t.references :position, null: false, foreign_key: true
-      t.references :outlet, null: false, foreign_key: true
 
       t.timestamps
     end

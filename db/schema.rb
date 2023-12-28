@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_28_183446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -33,6 +33,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
     t.index ["recipient_type", "recipient_id"], name: "index_activities_on_recipient_type_and_recipient_id"
     t.index ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type"
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fields", force: :cascade do |t|
@@ -58,19 +65,25 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
   end
 
   create_table "outlets", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
+    t.string "short"
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_outlets_on_slug", unique: true
   end
 
   create_table "people", force: :cascade do |t|
     t.string "first_name"
+    t.string "middle_name"
     t.string "last_name"
+    t.string "preferred_name"
     t.boolean "active", default: true, null: false
+    t.bigint "default_position_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["default_position_id"], name: "index_people_on_default_position_id"
     t.index ["user_id"], name: "index_people_on_user_id"
   end
 
@@ -129,8 +142,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
   create_table "positions", force: :cascade do |t|
     t.string "name"
     t.string "slug"
+    t.bigint "outlet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["outlet_id"], name: "index_positions_on_outlet_id"
+    t.index ["slug"], name: "index_positions_on_slug", unique: true
   end
 
   create_table "roles", force: :cascade do |t|
@@ -194,10 +210,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
     t.datetime "end_time"
     t.bigint "person_id", null: false
     t.bigint "position_id", null: false
-    t.bigint "outlet_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["outlet_id"], name: "index_shifts_on_outlet_id"
     t.index ["person_id"], name: "index_shifts_on_person_id"
     t.index ["position_id"], name: "index_shifts_on_position_id"
   end
@@ -252,9 +266,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "people", "positions", column: "default_position_id"
   add_foreign_key "people", "users"
   add_foreign_key "person_group_assignments", "people"
   add_foreign_key "person_group_assignments", "person_groups"
+  add_foreign_key "positions", "outlets"
   add_foreign_key "rules", "fields"
   add_foreign_key "service_templates_fields", "fields"
   add_foreign_key "service_templates_fields", "service_templates"
@@ -262,7 +278,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
   add_foreign_key "services", "service_templates"
   add_foreign_key "services_periods", "periods"
   add_foreign_key "services_periods", "services"
-  add_foreign_key "shifts", "outlets"
   add_foreign_key "shifts", "people"
   add_foreign_key "shifts", "positions"
 end
