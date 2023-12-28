@@ -2,7 +2,7 @@ class RulesController < ApplicationController
   include Searchable
 
   expose :rules, -> { search(Rule.includes_associated, sortable_fields) }
-  expose :rule, scope: ->{ Rule }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :rule, scope: -> { Rule }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /rules
   def index

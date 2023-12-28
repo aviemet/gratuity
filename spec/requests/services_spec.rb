@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/services", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Service. As you add validations to Service, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/services", type: :request do
       it "does not create a new Service" do
         expect {
           post services_url, params: { service: invalid_attributes }
-        }.to change(Service, :count).by(0)
+        }.not_to change(Service, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post services_url, params: { service: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/services", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         service = Service.create! valid_attributes
         patch service_url(service), params: { service: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

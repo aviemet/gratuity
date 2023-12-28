@@ -2,7 +2,7 @@ class ServicesPeriodsController < ApplicationController
   include Searchable
 
   expose :services_periods, -> { search(ServicesPeriod.includes_associated, sortable_fields) }
-  expose :services_period, scope: ->{ ServicesPeriod }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :services_period, scope: -> { ServicesPeriod }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /services_periods
   def index

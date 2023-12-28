@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_27_220054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -53,6 +53,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
     t.string "tree_base"
     t.string "user_search"
     t.string "sync_interval"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "outlets", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -119,6 +126,13 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
+  create_table "positions", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -173,6 +187,19 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
     t.datetime "updated_at", null: false
     t.index ["period_id"], name: "index_services_periods_on_period_id"
     t.index ["service_id"], name: "index_services_periods_on_service_id"
+  end
+
+  create_table "shifts", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.bigint "person_id", null: false
+    t.bigint "position_id", null: false
+    t.bigint "outlet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["outlet_id"], name: "index_shifts_on_outlet_id"
+    t.index ["person_id"], name: "index_shifts_on_person_id"
+    t.index ["position_id"], name: "index_shifts_on_position_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -235,4 +262,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_22_003514) do
   add_foreign_key "services", "service_templates"
   add_foreign_key "services_periods", "periods"
   add_foreign_key "services_periods", "services"
+  add_foreign_key "shifts", "outlets"
+  add_foreign_key "shifts", "people"
+  add_foreign_key "shifts", "positions"
 end

@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/service_templates", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # ServiceTemplate. As you add validations to ServiceTemplate, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/service_templates", type: :request do
       it "does not create a new ServiceTemplate" do
         expect {
           post service_templates_url, params: { service_template: invalid_attributes }
-        }.to change(ServiceTemplate, :count).by(0)
+        }.not_to change(ServiceTemplate, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post service_templates_url, params: { service_template: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/service_templates", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         service_template = ServiceTemplate.create! valid_attributes
         patch service_template_url(service_template), params: { service_template: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

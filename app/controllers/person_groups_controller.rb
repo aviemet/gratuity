@@ -1,6 +1,6 @@
 class PersonGroupsController < ApplicationController
   expose :person_groups, -> { PersonGroups.includes_associated }
-  expose :person_group, id: ->{ params[:slug] }, scope: ->{ PersonGroups.includes_associated }, find_by: :slug
+  expose :person_group, id: -> { params[:slug] }, scope: -> { PersonGroups.includes_associated }, find_by: :slug
 
   # GET /person_group
   def index
@@ -86,8 +86,8 @@ class PersonGroupsController < ApplicationController
   def person_group_params
     params.require(:person_group).permit(
       :name, :description, permissions: [
-        person:       [:index, :show, :create, :update, :delete],
-        user:         [:index, :show, :create, :update, :delete],
+        person: [:index, :show, :create, :update, :delete],
+        user: [:index, :show, :create, :update, :delete],
       ],
     )
   end

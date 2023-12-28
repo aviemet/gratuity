@@ -2,7 +2,7 @@ class PeriodsController < ApplicationController
   include Searchable
 
   expose :periods, -> { search(Period.includes_associated, sortable_fields) }
-  expose :period, scope: ->{ Period }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :period, scope: -> { Period }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /periods
   def index

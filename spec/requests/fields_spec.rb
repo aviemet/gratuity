@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/fields", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Field. As you add validations to Field, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/fields", type: :request do
       it "does not create a new Field" do
         expect {
           post fields_url, params: { field: invalid_attributes }
-        }.to change(Field, :count).by(0)
+        }.not_to change(Field, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post fields_url, params: { field: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/fields", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         field = Field.create! valid_attributes
         patch field_url(field), params: { field: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

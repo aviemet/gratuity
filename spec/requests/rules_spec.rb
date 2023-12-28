@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/rules", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Rule. As you add validations to Rule, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/rules", type: :request do
       it "does not create a new Rule" do
         expect {
           post rules_url, params: { rule: invalid_attributes }
-        }.to change(Rule, :count).by(0)
+        }.not_to change(Rule, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post rules_url, params: { rule: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/rules", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         rule = Rule.create! valid_attributes
         patch rule_url(rule), params: { rule: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

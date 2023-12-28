@@ -2,7 +2,7 @@ class FieldsController < ApplicationController
   include Searchable
 
   expose :fields, -> { search(Field.includes_associated, sortable_fields) }
-  expose :field, scope: ->{ Field }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :field, scope: -> { Field }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /fields
   def index

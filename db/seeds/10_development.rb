@@ -15,6 +15,10 @@ if Rails.env.development?
     user.add_role :super_admin
   end
 
+  if Outlet.count == 0
+    Outlet.create(name: "717B")
+  end
+
   if Period.count == 0
     Period.create([
       {

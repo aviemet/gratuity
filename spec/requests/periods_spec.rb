@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/periods", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # Period. As you add validations to Period, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/periods", type: :request do
       it "does not create a new Period" do
         expect {
           post periods_url, params: { period: invalid_attributes }
-        }.to change(Period, :count).by(0)
+        }.not_to change(Period, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post periods_url, params: { period: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/periods", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         period = Period.create! valid_attributes
         patch period_url(period), params: { period: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

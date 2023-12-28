@@ -13,7 +13,7 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/service_templates_fields", type: :request do
-  
+
   # This should return the minimal set of attributes required to create a valid
   # ServiceTemplatesField. As you add validations to ServiceTemplatesField, be sure to
   # adjust the attributes here as well.
@@ -74,15 +74,14 @@ RSpec.describe "/service_templates_fields", type: :request do
       it "does not create a new ServiceTemplatesField" do
         expect {
           post service_templates_fields_url, params: { service_templates_field: invalid_attributes }
-        }.to change(ServiceTemplatesField, :count).by(0)
+        }.not_to change(ServiceTemplatesField, :count)
       end
 
-    
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
         post service_templates_fields_url, params: { service_templates_field: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 
@@ -108,13 +107,13 @@ RSpec.describe "/service_templates_fields", type: :request do
     end
 
     context "with invalid parameters" do
-    
+
       it "renders a response with 422 status (i.e. to display the 'edit' template)" do
         service_templates_field = ServiceTemplatesField.create! valid_attributes
         patch service_templates_field_url(service_templates_field), params: { service_templates_field: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
-    
+
     end
   end
 

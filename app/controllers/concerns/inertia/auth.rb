@@ -4,9 +4,11 @@ module Inertia::Auth
   extend ActiveSupport::Concern
 
   included do
-    inertia_share auth: lambda { {
-      user: current_user ? current_user.render : nil,
-      form_authenticity_token:,
-    } }
+    inertia_share auth: lambda do
+      {
+        user: current_user&.render,
+        form_authenticity_token:,
+      }
+    end
   end
 end

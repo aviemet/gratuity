@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   multisearchable(
     against: [:email],
     additional_attributes: ->(record) { { label: record.email } },

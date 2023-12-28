@@ -6,7 +6,8 @@ class PersonGroup < ApplicationRecord
 
   pg_search_scope(
     :search,
-    against: [:name], associated_against: {
+    against: [:name],
+    associated_against: {
       person: [:first_name, :last_name],
     },
     using: {

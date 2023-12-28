@@ -12,10 +12,12 @@ class UsersController < ApplicationController
 
     render inertia: "Users/Index", props: {
       users: users.render(view: :index),
-      pagination: -> { {
-        count: users.count,
-        **pagination_data(paginated_users)
-      } }
+      pagination: -> {
+        {
+          count: users.count,
+          **pagination_data(paginated_users)
+        }
+      }
     }
   end
 

@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
   include Searchable
 
   expose :people, -> { search(People.includes_associated, sortable_fields) }
-  expose :person, scope: ->{ People }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :person, scope: -> { People }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /people
   def index
@@ -12,10 +12,12 @@ class PeopleController < ApplicationController
 
     render inertia: "People/Index", props: {
       people: paginated_people.render(view: :index),
-      pagination: -> { {
-        count: people.count,
-        **pagination_data(paginated_people)
-      } }
+      pagination: -> {
+        {
+          count: people.count,
+          **pagination_data(paginated_people)
+        }
+      }
     }
   end
 

@@ -2,7 +2,7 @@ class ServiceTemplatesController < ApplicationController
   include Searchable
 
   expose :service_templates, -> { search(ServiceTemplate.includes_associated, sortable_fields) }
-  expose :service_template, scope: ->{ ServiceTemplate }, find: ->(id, scope){ scope.includes_associated.find(id) }
+  expose :service_template, scope: -> { ServiceTemplate }, find: ->(id, scope) { scope.includes_associated.find(id) }
 
   # GET /service_templates
   def index

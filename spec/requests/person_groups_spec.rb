@@ -62,7 +62,7 @@ RSpec.describe "/person_groups" do
 
     context "with valid parameters" do
       it "creates a new Group and redirects to show page" do
-        expect{
+        expect {
           post person_groups_url, params: valid_attributes
         }.to change(PersonGroup, :count).by(1)
         expect(response).to redirect_to(person_group_url(PersonGroup.last))
@@ -114,7 +114,7 @@ RSpec.describe "/person_groups" do
     it "destroys the requested person_group" do
       person_group = create(:person_group)
       expect {
-        delete person_group_url({slug: person_group.slug})
+        delete person_group_url({ slug: person_group.slug })
       }.to change(PersonGroup, :count).by(-1)
     end
 

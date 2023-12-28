@@ -75,7 +75,7 @@ RSpec.describe "/people" do
 
     context "with valid parameters" do
       it "creates a new Person and redirects to show page" do
-        expect{
+        expect {
           post people_url, params: valid_attributes
         }.to change(Person, :count).by(1)
         expect(response).to redirect_to(person_url(Person.last))

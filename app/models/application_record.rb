@@ -4,7 +4,7 @@ class ApplicationRecord < ActiveRecord::Base
   include Renderable
 
   include PublicActivity::Model
-  tracked owner: proc{ |controller, _model| controller&.current_user || nil }
+  tracked owner: proc { |controller, _model| controller&.current_user || nil }
 
   include PgSearch::Model
   ##

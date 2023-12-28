@@ -1,6 +1,27 @@
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController
+  # TODO: Display flash message on redirect
+  # GET /users/confirmation?confirmation_token=:confirmation_token
+  def show
+    unless params[:confirmation_token]
+      # flash.now[:alert] = "Invalid or missing confirmation token"
+      redirect_to new_user_session_path
+      return
+    end
+
+    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
+    yield resource if block_given?
+
+    if resource.errors.empty?
+      sign_in resource
+      # set_flash_message!(:notice, :confirmed)
+      respond_with_navigational(resource) { redirect_to after_confirmation_path_for(resource_name, resource) }
+    else
+      redirect_to user_confirmation_path, inertia: { errors: self.resource.errors }
+    end
+  end
+
   # GET /users/confirmation/new(?email=:email)
   def new
     render inertia: "Public/Devise/Confirmations/New", props: {
@@ -19,27 +40,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       respond_with({}, location: after_resending_confirmation_instructions_path_for(resource_name))
     else
       redirect_to new_user_confirmation_path, inertia: { errors: self.resource.errors }
-    end
-  end
-
-  # TODO: Display flash message on redirect
-  # GET /users/confirmation?confirmation_token=:confirmation_token
-  def show
-    unless params[:confirmation_token]
-      # flash.now[:alert] = "Invalid or missing confirmation token"
-      redirect_to new_user_session_path
-      return
-    end
-
-    self.resource = resource_class.confirm_by_token(params[:confirmation_token])
-    yield resource if block_given?
-
-    if resource.errors.empty?
-      sign_in resource
-      # set_flash_message!(:notice, :confirmed)
-      respond_with_navigational(resource){ redirect_to after_confirmation_path_for(resource_name, resource) }
-    else
-      redirect_to user_confirmation_path, inertia: { errors: self.resource.errors }
     end
   end
 
