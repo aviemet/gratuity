@@ -6,7 +6,6 @@ module.exports = {
 	'extends': [
 		'plugin:react/recommended',
 		'plugin:import/typescript',
-		'plugin:storybook/recommended',
 		'plugin:react-hooks/recommended',
 	],
 	'plugins': ['react', '@typescript-eslint', 'import'],

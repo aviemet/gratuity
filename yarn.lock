@@ -2910,14 +2910,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.14.2":
-  version: 5.14.2
-  resolution: "@tanstack/react-query@npm:5.14.2"
+"@tanstack/react-query@npm:^5.15.0":
+  version: 5.15.0
+  resolution: "@tanstack/react-query@npm:5.15.0"
   dependencies:
     "@tanstack/query-core": 5.14.2
   peerDependencies:
     react: ^18.0.0
-  checksum: 68e2c4c40d420bc88de21f62e6efdf43b62af5e6b22063c74408e056e39c80bd38918187de86f55391308a2d9ca0e9109cb1e8057609d91b18ac7f53ef8b6c74
+  checksum: 9dbe763a6109ebcf91178cc8b4f4172cf207c1ae3009f2e35b7c496447c3ba654cb190d974d0dc340d29cc7e50ad749a1b521c1de40245eb2bfafecfe2e106c3
   languageName: node
   linkType: hard
 
@@ -6541,7 +6541,7 @@ __metadata:
     "@semantic-release/changelog": ^6.0.3
     "@semantic-release/git": ^10.0.1
     "@tabler/icons-react": ^2.44.0
-    "@tanstack/react-query": ^5.14.2
+    "@tanstack/react-query": ^5.15.0
     "@tanstack/react-query-devtools": ^5.14.2
     "@testing-library/react": ^14.1.2
     "@testing-library/user-event": ^14.5.1
