@@ -3,6 +3,8 @@ class ServiceSerializer < ApplicationSerializer
 
   attributes(
     :date,
+    :created_at,
+    :updated_at,
   )
 
   belongs_to :period, serializer: PeriodSerializer

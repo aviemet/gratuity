@@ -4,5 +4,7 @@ class ServiceTemplateSerializer < ApplicationSerializer
   attributes(
     :name,
     :description,
+    :created_at,
+    :updated_at,
   )
 end

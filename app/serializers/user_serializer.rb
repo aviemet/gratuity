@@ -15,9 +15,9 @@ class UserSerializer < ApplicationSerializer
     :unconfirmed_email,
     :failed_attempts,
     :locked_at,
+    :active,
     :created_at,
     :updated_at,
-    :active,
     table_preferences: { type: "IUserTablePreferences" },
     user_preferences: { type: "IUserPreferences" },
   )
