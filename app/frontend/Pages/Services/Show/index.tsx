@@ -13,7 +13,6 @@ const ShowService = ({ services }: IShowServiceProps) => {
 	const { paths } = useLocation()
 	const title = `Service for ${formatter.date.english(paths[1].replace('-', '/'))}`
 
-
 	console.log({ paths })
 	// console.log({ services })
 	return (
@@ -34,13 +33,13 @@ const ShowService = ({ services }: IShowServiceProps) => {
 						</Menu.Dropdown>
 					</Menu>
 				</Group>
-				<Tabs urlControlled defaultValue="employees">
+				<Tabs urlControlled defaultValue="employees" variant="outline">
 					<Tabs.List>
 						<Tabs.Tab value="employees">Employees</Tabs.Tab>
 						{ services.map(service => (
 							<Tabs.Tab
 								key={ service.id }
-								value={ service.period.name }
+								value={ service.period.name.toLocaleLowerCase() }
 							>{ service.period.name }
 							</Tabs.Tab>
 						)) }

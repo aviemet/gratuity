@@ -13,3 +13,7 @@ export const external = css`
 		pointer-events: none;
 	}
 `
+
+export const link = css`
+	cursor: pointer;
+`

@@ -14,7 +14,27 @@ export const calendar = css`
 
 		td.mantine-Calendar-monthCell {
 			border: 1px solid #999;
-			min-height: 100px;
+			vertical-align: text-bottom;
+
+			.mantine-Calendar-day {
+				width: 100%;
+				height: 100%;
+				flex-direction: column;
+				justify-content: start;
+				gap: ${vars.spacing.xxs};
+				padding: ${vars.spacing.xxs};
+				
+				.mantine-Button-root {
+					width: 30px;
+					height: 30px;
+					padding: 0;
+					border-radius: 100%;
+				}
+
+				.mantine-Badge-root {
+					width: 100%;
+				}
+			}
 		}
 	}
 `

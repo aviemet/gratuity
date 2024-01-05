@@ -1,8 +1,10 @@
 import React, { forwardRef, useMemo } from 'react'
 import { type Method, type Visit } from '@inertiajs/core'
+import cx from 'clsx'
 import InertiaLink from './InertiaLink'
 import ExternalLink from './ExternalLink'
 import { type AnchorProps, type ButtonProps } from '@mantine/core'
+import * as classes from './Link.css'
 
 export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 	children?: React.ReactNode
@@ -23,7 +25,7 @@ export interface ILinkProps extends Omit<AnchorProps, 'onClick'|'onProgress'> {
 const externalPrefix = ['http', 'www']
 
 const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
-	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, ...props },
+	{ children, href, as = 'a', method, visit, external, onProgress, preserveScroll, buttonProps, className, ...props },
 	ref,
 ) => {
 	const renderExternal = useMemo(() => {
@@ -44,6 +46,7 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 			<ExternalLink
 				href={ href }
 				ref={ ref }
+				className={ cx(className, classes.link ) }
 				{ ...onProgress }
 				{ ...props }
 			>
@@ -60,6 +63,7 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>((
 			visit={ visit }
 			ref={ ref }
 			preserveScroll={ preserveScroll }
+			className={ cx(className, classes.link ) }
 			{ ...onProgress }
 			{ ...props }
 		>

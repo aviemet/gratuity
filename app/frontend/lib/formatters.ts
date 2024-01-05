@@ -12,9 +12,9 @@ export const currency = (amount: number, currency = 'USD') => {
 
 export const date = {
 	short: (date: string | Date) => dayjs(new Date(date)).format('MM/DD/YYYY'),
+	link: (date: string | Date) => dayjs(new Date(date)).format('YYYY-MM-DD'),
 	long: (date: string | Date) => dayjs(new Date(date)).format('MM/DD/YYYY HH:mm:ss'),
 	relative: (date: string | Date) => dayjs(new Date(date)).fromNow(),
 	english: (date: string | Date) => dayjs(new Date(date)).format('MMMM DD, YYYY'),
 	time: (date: string | Date) => dayjs(new Date(date)).format('HH:mm:ss'),
-	link: (date: string | Date) => dayjs(new Date(date)).format('YYYY-MM-DD')
 }

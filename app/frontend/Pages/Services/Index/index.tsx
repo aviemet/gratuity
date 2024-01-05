@@ -21,27 +21,27 @@ const ServicesIndex = ({ services, pagination }: IServiceIndexProps) => {
 		<IndexPageTemplate
 			title="Services"
 			model="services"
-			rows={services}
-			pagination={pagination}
-			deleteRoute={Routes.services()}
-			menuOptions={[
+			rows={ services }
+			pagination={ pagination }
+			deleteRoute={ Routes.services() }
+			menuOptions={ [
 				{ label: 'New Service', href: Routes.newService(), icon: NewIcon },
-			]}
+			] }
 		>
-			<Box style={{ textAlign: 'right' }}>
+			<Box style={ { textAlign: 'right' } }>
 				<SegmentedControl
-					value={view}
-					onChange={toggleView}
-					data={[
+					value={ view }
+					onChange={ toggleView }
+					data={ [
 						{ label: <TableViewIcon />, value: 'table' },
 						{ label: <CalendarIcon />, value: 'calendar' },
-					]}
+					] }
 				/>
 			</Box>
-			{view === 'table' ?
+			{ view === 'table' ?
 				<ServicesTable />
 				:
-				<CalendarView />
+				<CalendarView services={ services } />
 			}
 		</IndexPageTemplate>
 	)

@@ -29,7 +29,11 @@ const InertiaLinkComponent = forwardRef<HTMLAnchorElement, ILinkProps>((
 		})
 	}
 
-	const mergedButtonProps = Object.assign({ disabled }, buttonProps, exclude(props, ['classNames', 'styles', 'vars']))
+	const mergedButtonProps = Object.assign(
+		{ disabled },
+		buttonProps,
+		exclude(props, ['classNames', 'style', 'vars']),
+	)
 
 	const processedHref = disabled ? '#' : href
 
