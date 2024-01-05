@@ -96,6 +96,108 @@ export const acceptUserInvitation: ((
 
 /**
  * Generates rails route to
+ * /api/options/companies(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiCompaniesOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/outlets(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiOutletsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeople: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/people(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeopleOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/periods(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPeriodsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/people/:id(.:format)
+ * @param {any} id
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPerson: ((
+  id: RequiredRouteParameter,
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/positions(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiPositionsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/rules(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiRulesOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/services(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiServicesOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
+ * /api/options/shifts(.:format)
+ * @param {object | undefined} options
+ * @returns {string} route path
+ */
+export const apiShiftsOptions: ((
+  options?: {format?: OptionalRouteParameter} & RouteOptions
+) => string) & RouteHelperExtras;
+
+/**
+ * Generates rails route to
  * /api/users/:id/update_table_preferences(.:format)
  * @param {any} id
  * @param {object | undefined} options

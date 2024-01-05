@@ -4,6 +4,7 @@ import { css } from '@linaria/core'
 
 export const calendar = css`
 	text-align: center;
+	height: 100%;
 
 	.mantine-Calendar-calendarHeader {
 		width: 100%;
@@ -15,6 +16,7 @@ export const calendar = css`
 		td.mantine-Calendar-monthCell {
 			border: 1px solid #999;
 			vertical-align: text-bottom;
+			height: 150px;
 
 			.mantine-Calendar-day {
 				width: 100%;

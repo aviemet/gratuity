@@ -25,7 +25,8 @@ class ServicesController < ApplicationController
     service_periods = Service.where(date: Date.parse(params[:date]))
 
     render inertia: "Services/Show", props: {
-      services: -> { service_periods.render(view: :show) }
+      services: -> { service_periods.render(view: :show) },
+      periods: -> { Period.all.render(view: :options) }
     }
   end
 

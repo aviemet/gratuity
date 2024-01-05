@@ -12,6 +12,7 @@ import {
 	UsersIcon,
 	UserGroupIcon,
 	PeopleIcon,
+	ServiceIcon,
 } from '@/Components/Icons'
 
 import IconProvider from '@/Layouts/Providers/IconProvider'
@@ -41,6 +42,7 @@ const Sidebar = () => {
 				<Box onClick={ handleNavClick } className={ cx([classes.links]) }>
 					<ul>
 						<li><MenuLink href={ Routes.dashboard() } icon={ <DashboardIcon /> }>Dashboard</MenuLink></li>
+						<li><MenuLink href={ Routes.services() } icon={ <ServiceIcon /> }>Services</MenuLink></li>
 						<Divider />
 						<li>
 							<MenuLink href={ Routes.people() } icon={ <PeopleIcon /> }>People</MenuLink>

@@ -46,8 +46,8 @@ export {
 	MdOutlineDelete as TrashIcon,
 	MdCalendarMonth as CalendarIcon,
 	MdOutlineViewList as TableViewIcon,
+	MdRestaurantMenu as ServiceIcon,
 } from 'react-icons/md'
-
 
 export {
 	AiOutlinePlusCircle as PlusCircleIcon,

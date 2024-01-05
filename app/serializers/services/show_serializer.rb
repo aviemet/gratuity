@@ -6,6 +6,6 @@ class Services::ShowSerializer < ApplicationSerializer
     :date,
   )
 
-  belongs_to :period, serializer: PeriodSerializer
+  belongs_to :period, serializer: Periods::ShowSerializer
   belongs_to :service_template, serializer: ServiceTemplateSerializer
 end

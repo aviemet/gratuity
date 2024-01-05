@@ -10,11 +10,21 @@ export const currency = (amount: number, currency = 'USD') => {
 	return formatter.format(amount)
 }
 
+type TDateFnArg = string | Date | dayjs.Dayjs
+
+const getDate = (date: TDateFnArg) => {
+	if(typeof date === 'string' || date instanceof Date) {
+		return dayjs(date)
+	}
+
+	return date
+}
+
 export const date = {
-	short: (date: string | Date) => dayjs(new Date(date)).format('MM/DD/YYYY'),
-	link: (date: string | Date) => dayjs(new Date(date)).format('YYYY-MM-DD'),
-	long: (date: string | Date) => dayjs(new Date(date)).format('MM/DD/YYYY HH:mm:ss'),
-	relative: (date: string | Date) => dayjs(new Date(date)).fromNow(),
-	english: (date: string | Date) => dayjs(new Date(date)).format('MMMM DD, YYYY'),
-	time: (date: string | Date) => dayjs(new Date(date)).format('HH:mm:ss'),
+	short: (date: TDateFnArg) => getDate(date).format('MM/DD/YYYY'),
+	link: (date: TDateFnArg) => getDate(date).format('YYYY-MM-DD'),
+	long: (date: TDateFnArg) => getDate(date).format('MM/DD/YYYY HH:mm:ss'),
+	relative: (date: TDateFnArg) => getDate(date).fromNow(),
+	english: (date: TDateFnArg) => getDate(date).format('MMMM DD, YYYY'),
+	time: (date: TDateFnArg) => getDate(date).format('HH:mm:ss'),
 }

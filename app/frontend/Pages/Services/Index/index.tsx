@@ -17,6 +17,8 @@ const viewOptions = ['calendar', 'table']
 const ServicesIndex = ({ services, pagination }: IServiceIndexProps) => {
 	const [view, toggleView] = useToggle(viewOptions)
 
+	const servicesByDate = Object.groupBy(services, ({ date }) => date)
+	console.log({ services, servicesByDate })
 	return (
 		<IndexPageTemplate
 			title="Services"

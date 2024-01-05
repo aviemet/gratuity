@@ -9,7 +9,7 @@ import { type IAsyncDropdown } from '.'
 interface IPeopleDropdown extends IAsyncDropdown<Schema.PeopleOptions> {}
 
 const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
-	{ label = 'Person', name = 'person_id', initialData, value, ...props },
+	{ label = 'Person', name = 'person_id', initialData, value, onChange, ...props },
 	ref,
 ) => {
 	const { data, isStale, refetch } = getPeopleAsOptions({
@@ -35,10 +35,18 @@ const PeopleDropdown = forwardRef<HTMLInputElement, IPeopleDropdown>((
 	}
 
 	if(useInFormContext()) {
-		return <FormSelect { ...commonProps } />
+		return <FormSelect
+			onChange={ (value, form) => {
+				if(onChange) onChange(value)
+			} }
+			{ ...commonProps }
+		/>
 	}
 
-	return <InputSelect { ...commonProps } />
+	return <InputSelect
+		onChange={ onChange }
+		{ ...commonProps }
+	/>
 })
 
 export default PeopleDropdown

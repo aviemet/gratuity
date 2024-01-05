@@ -4,6 +4,8 @@ import MenuItem from './MenuItem'
 import MenuLink from './MenuLink'
 import MenuTarget from './MenuTarget'
 
+export interface IMenuProps extends MenuProps {}
+
 const MenuComponent = ({ children, ...props }: MenuProps) => {
 	return (
 		<Menu { ...props }>{ children }</Menu>
